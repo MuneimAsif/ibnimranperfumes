@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IBN IMRAN — Luxury Fragrances from Pakistan</title>
+<meta name="description" content="IBN IMRAN crafts signature perfumes with rare ingredients and timeless sophistication. Royal Fury Intense, Sultan Al Noor, Midnight Desire.">
+<link rel="icon" href="image-1.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0b0a;
+    --bg-alt:#15120f;
+    --bg-card:#191510;
+    --ink:#f3ecdf;
+    --ink-soft:#b7a98e;
+    --ink-faint:#766b56;
+    --gold:#c9a35a;
+    --gold-deep:#8c6c30;
+    --line:#2b2620;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    letter-spacing:.01em;
+    margin:0;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:'Jost',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.28em;
+    font-size:11px;
+    color:var(--gold);
+    display:flex;align-items:center;gap:14px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold-deep);}
+
+  /* Header */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    padding:22px 0;
+    transition:background .4s ease, padding .4s ease, border-color .4s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(12,11,10,.92);
+    backdrop-filter:blur(10px);
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand img{height:34px;width:auto;}
+  .brand span{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:.08em;}
+  nav ul{display:flex;gap:38px;list-style:none;margin:0;padding:0;}
+  nav a{
+    font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);
+    position:relative;padding-bottom:6px;transition:color .3s;
+  }
+  nav a:hover{color:var(--ink);}
+  nav a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);
+    transition:width .3s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .nav-toggle{display:none;background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;}
+
+  /* Hero */
+  .hero{
+    display:block;
+    position:relative;overflow:hidden;
+    padding:0 0 90px;
+  }
+  .hero-full{margin:0;}
+  .hero-full img{width:100%;display:block;}
+  .cta-row{display:flex;gap:18px;justify-content:center;margin-top:42px;flex-wrap:wrap;}
+  .btn{
+    padding:15px 34px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    border:1px solid var(--gold-deep);transition:all .35s ease;
+    display:inline-block;
+  }
+  .btn-solid{background:var(--gold);color:#15120f;border-color:var(--gold);}
+  .btn-solid:hover{background:transparent;color:var(--gold);}
+  .btn-ghost{color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  /* divider svg */
+  .divider{display:flex;justify-content:center;padding:6px 0 0;}
+  .divider svg{width:54px;height:90px;opacity:.55;}
+  .divider path{
+    fill:none;stroke:var(--gold);stroke-width:1;
+    stroke-dasharray:240;stroke-dashoffset:240;
+    transition:stroke-dashoffset 1.4s ease;
+  }
+  .divider.in-view path{stroke-dashoffset:0;}
+
+  /* House section */
+  .house{padding:130px 0 110px;}
+  .house .wrap{display:flex;justify-content:center;}
+  .house-text{max-width:680px;text-align:center;}
+  .house-text .eyebrow{justify-content:center;}
+  .house-text .eyebrow::after{content:"";width:26px;height:1px;background:var(--gold-deep);}
+  .house h2{font-size:clamp(28px,3.4vw,42px);line-height:1.25;margin-top:18px;}
+  .house p.lede{color:var(--ink-soft);font-size:16px;line-height:1.9;margin-top:24px;}
+  .house p.lede + p.lede{margin-top:16px;}
+  .house-signoff{
+    font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);
+    font-size:20px;
+  }
+  .house a.more{
+    display:inline-flex;align-items:center;gap:10px;margin-top:30px;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+    border-bottom:1px solid var(--gold-deep);padding-bottom:8px;
+  }
+
+  /* fade-in utility */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease, transform .9s ease;}
+  .reveal.in-view{opacity:1;transform:none;}
+
+  /* Collection */
+  .collection{padding:110px 0 130px;background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .section-head{text-align:center;margin-bottom:70px;}
+  .section-head h2{font-size:clamp(30px,3.6vw,46px);margin-top:18px;font-style:italic;}
+  .section-head .eyebrow{justify-content:center;}
+  .section-head .eyebrow::after{content:"";width:26px;height:1px;background:var(--gold-deep);}
+
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;}
+  .size-label{
+    text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;
+    color:var(--ink-soft);font-size:19px;margin:0 0 32px;
+  }
+  .grid-3 + .size-label{margin-top:80px;}
+  .card{
+    background:var(--bg-card);border:1px solid var(--line);
+    text-align:center;
+    transition:transform .4s ease, border-color .4s ease;
+    position:relative;overflow:hidden;
+  }
+  .card:hover{transform:translateY(-6px);border-color:var(--gold-deep);}
+  .card .shot{position:relative;aspect-ratio:3/4;overflow:hidden;background:#000;}
+  .card .shot img{
+    width:100%;height:100%;object-fit:cover;object-position:top center;
+    display:block;transition:transform .6s ease;
+  }
+  .card:hover .shot img{transform:scale(1.04);}
+  .card .num{
+    position:absolute;top:16px;left:16px;z-index:2;
+    font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:13px;
+    letter-spacing:.2em;background:rgba(12,11,10,.55);backdrop-filter:blur(4px);
+    border:1px solid rgba(201,163,90,.35);padding:5px 12px;
+  }
+  .card-body{padding:34px 30px 36px;}
+  .card .mood{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);
+  }
+  .card h3{font-size:26px;margin-top:12px;font-style:italic;}
+  .card .notes{color:var(--ink-soft);font-size:14px;margin-top:14px;line-height:1.7;min-height:42px;}
+  .card .price{
+    margin-top:22px;font-family:'Jost',sans-serif;color:var(--gold);
+    font-size:13px;letter-spacing:.08em;
+  }
+  .card .price span{color:var(--ink-faint);margin-right:6px;}
+  .card a.shop-link{
+    display:block;margin-top:24px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-soft);border-top:1px solid var(--line);padding-top:18px;
+  }
+  .card a.shop-link:hover{color:var(--gold);}
+
+  .view-all{display:flex;justify-content:center;margin-top:60px;}
+
+  /* CTA banner */
+  .cta-banner{
+    padding:120px 28px;text-align:center;position:relative;
+    background:linear-gradient(180deg, var(--bg) 0%, #100e0c 100%);
+  }
+  .cta-banner .eyebrow{justify-content:center;margin-bottom:0;}
+  .cta-banner .eyebrow::after{content:"";width:26px;height:1px;background:var(--gold-deep);}
+  .cta-banner h2{font-size:clamp(28px,4vw,48px);margin:22px auto 38px;max-width:600px;font-style:italic;}
+
+  /* Footer */
+  footer{background:var(--bg-alt);border-top:1px solid var(--line);padding:90px 0 0;}
+  .foot-grid{display:grid;grid-template-columns:1.3fr .9fr .9fr .9fr 1fr;gap:40px;padding-bottom:70px;}
+  .foot-brand img{height:64px;margin-bottom:18px;}
+  .foot-tagline{
+    font-family:'Jost',sans-serif;text-transform:uppercase;letter-spacing:.22em;
+    font-size:12px;color:var(--gold);
+  }
+  .foot-col h4{
+    font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:22px;font-weight:400;
+  }
+  .foot-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px;}
+  .foot-col a, .foot-col li{color:var(--ink-soft);font-size:14px;}
+  .foot-col a:hover{color:var(--ink);}
+  .foot-bottom{
+    border-top:1px solid var(--line);padding:26px 0;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:12px;color:var(--ink-faint);
+  }
+
+  @media (max-width:880px){
+    nav, .nav-toggle{}
+    nav ul{gap:24px;}
+    .hero{padding:0 0 60px;}
+    .house .wrap{grid-template-columns:1fr;gap:50px;}
+    .grid-3{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:40px;}
+  }
+  @media (max-width:640px){
+    nav ul{position:fixed;top:64px;left:0;right:0;background:rgba(12,11,10,.97);
+      flex-direction:column;align-items:center;gap:0;padding:10px 0 22px;
+      border-bottom:1px solid var(--line);
+      transform:translateY(-12px);opacity:0;visibility:hidden;
+      transition:opacity .3s ease, transform .3s ease, visibility .3s;
+    }
+    nav ul.open{transform:translateY(0);opacity:1;visibility:visible;}
+    nav ul li{padding:14px 0;}
+    .nav-toggle{display:block;}
+    .foot-grid{grid-template-columns:1fr;gap:36px;}
+    .foot-bottom{flex-direction:column;gap:10px;text-align:center;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal, .divider path{transition:none;opacity:1;transform:none;stroke-dashoffset:0;}
+  }
+  a:focus-visible, button:focus-visible{outline:1px solid var(--gold); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <img src="image-1.png" alt="IBN IMRAN">
+      <span>IBN IMRAN</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+    <nav>
+      <ul id="navList">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#collection">Shop</a></li>
+        <li><a href="#house">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-full reveal">
+    <img src="image-2.jpg" alt="IBN IMRAN Signature Fragrance Collection — Midnight Desire, Sultan Al Noor, Royal Fury Intense">
+  </div>
+  <div class="cta-row hero-cta">
+    <a href="#collection" class="btn btn-solid">Explore Collection</a>
+    <a href="#house" class="btn btn-ghost">Our Story</a>
+  </div>
+</section>
+
+<section class="house" id="house">
+  <div class="wrap">
+    <div class="reveal house-text">
+      <p class="eyebrow">Our Story</p>
+      <h2>Discover the Art<br>of Fine Fragrance</h2>
+      <p class="lede">At IBN IMRAN, fragrance is more than a perfume—it's an expression of confidence, elegance, and individuality. Our carefully curated collection is crafted with premium ingredients and inspired by timeless luxury, delivering scents that captivate from the first spray to the last impression.</p>
+      <p class="lede">Whether you choose the bold richness of Midnight Desire, the refreshing elegance of Sultan Al Noor, or the refined sophistication of Royal Fury Intense, every bottle is designed to become a signature part of your personality.</p>
+      <p class="lede house-signoff">An Identity In Every Drop.</p>
+      <a href="#contact" class="more">Discover the House →</a>
+    </div>
+  </div>
+</section>
+
+<section class="collection" id="collection">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">The Collection</p>
+      <h2>Two Sizes. One Signature.</h2>
+    </div>
+
+    <p class="size-label reveal">Full Size — 50 ml</p>
+    <div class="grid-3">
+
+      <div class="card reveal">
+        <div class="shot">
+          <span class="num">No. 01</span>
+          <img src="image-3.jpg" alt="Royal Fury Intense bottle">
+        </div>
+        <div class="card-body">
+          <p class="mood">Fresh Spicy Amber</p>
+          <h3>Royal Fury Intense</h3>
+          <p class="notes">Juniper Berries, Lavender, Cardamom.</p>
+          <p class="price">PKR 2,400</p>
+          <a href="https://www.ibnimranperfumes.com" class="shop-link">View Fragrance</a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="shot">
+          <span class="num">No. 02</span>
+          <img src="image-4.jpg" alt="Sultan Al Noor bottle">
+        </div>
+        <div class="card-body">
+          <p class="mood">Fresh &amp; Aquatic</p>
+          <h3>Sultan Al Noor</h3>
+          <p class="notes">Citruses, Rosemary, Woody.</p>
+          <p class="price">PKR 2,400</p>
+          <a href="https://www.ibnimranperfumes.com" class="shop-link">View Fragrance</a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="shot">
+          <span class="num">No. 03</span>
+          <img src="image-5.jpg" alt="Midnight Desire bottle">
+        </div>
+        <div class="card-body">
+          <p class="mood">Warm Woody Oud</p>
+          <h3>Midnight Desire</h3>
+          <p class="notes">Bergamot, Oud, Leather.</p>
+          <p class="price">PKR 2,200</p>
+          <a href="https://www.ibnimranperfumes.com" class="shop-link">View Fragrance</a>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="size-label reveal">Travel Size — 10 ml</p>
+    <div class="grid-3">
+
+      <div class="card reveal">
+        <div class="shot">
+          <span class="num">No. 01</span>
+          <img src="image-6.jpg" alt="Royal Fury Intense pocket perfume 10ml">
+        </div>
+        <div class="card-body">
+          <p class="mood">Fresh Spicy Amber</p>
+          <h3>Royal Fury Intense</h3>
+          <p class="notes">Pocket size — Juniper Berries, Lavender, Cardamom.</p>
+          <p class="price">PKR 400</p>
+          <a href="https://www.ibnimranperfumes.com" class="shop-link">View Fragrance</a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="shot">
+          <span class="num">No. 02</span>
+          <img src="image-7.jpg" alt="Sultan Al Noor pocket perfume 10ml">
+        </div>
+        <div class="card-body">
+          <p class="mood">Fresh &amp; Aquatic</p>
+          <h3>Sultan Al Noor</h3>
+          <p class="notes">Pocket size — Citruses, Rosemary, Woody.</p>
+          <p class="price">PKR 400</p>
+          <a href="https://www.ibnimranperfumes.com" class="shop-link">View Fragrance</a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="shot">
+          <span class="num">No. 03</span>
+          <img src="image-8.jpg" alt="Midnight Desire pocket perfume 10ml">
+        </div>
+        <div class="card-body">
+          <p class="mood">Warm Woody Oud</p>
+          <h3>Midnight Desire</h3>
+          <p class="notes">Pocket size — Bergamot, Oud, Leather.</p>
+          <p class="price">PKR 400</p>
+          <a href="https://www.ibnimranperfumes.com" class="shop-link">View Fragrance</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="view-all reveal">
+      <a href="#" class="btn btn-ghost">View All</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner reveal" id="contact">
+  <p class="eyebrow">Complimentary shipping across Pakistan</p>
+  <h2>Begin your fragrance story today.</h2>
+  <a href="#collection" class="btn btn-solid">Shop the Collection</a>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="image-1.png" alt="IBN IMRAN">
+        <p class="foot-tagline">An Identity In Every Drop</p>
+      </div>
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#collection">All Fragrances</a></li>
+          <li><a href="#collection">Royal Fury Intense</a></li>
+          <li><a href="#collection">Sultan Al Noor</a></li>
+          <li><a href="#collection">Midnight Desire</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>House</h4>
+        <ul>
+          <li><a href="#house">Our Story</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+923092138620">+92 309 2138620</a></li>
+          <li><a href="mailto:ibnimranperfumes@gmail.com">ibnimranperfumes@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Shipping &amp; Payment</h4>
+        <ul>
+          <li>Cash on Delivery</li>
+          <li>EasyPaisa</li>
+          <li>Bank Transfer</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 IBN IMRAN. All rights reserved.</span>
+      <span>Karachi, Pakistan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+  navToggle.addEventListener('click', () => navList.classList.toggle('open'));
+  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navList.classList.remove('open')));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal, .divider').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
